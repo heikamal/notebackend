@@ -2,6 +2,6 @@ POST http://localhost:3001/api/notes
 Content-Type: application/json
 
 {
-    "content": "Postman is good in testing backend",
+    "content": "GET and POST are the most important methods of HTTP protocol",
     "important": true
 }

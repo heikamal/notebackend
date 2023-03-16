@@ -47,15 +47,10 @@ app.get('/api/notes', (req, res) => {
       })
 })
 
-app.get('/api/notes/:id', (req, res) => {
-    const id = Number(req.params.id)
-    const note = notes.find(note => note.id === id)
-    if (note) {
-        res.json(note)
-    } else {
-        res.status(404).end()
-    }
-    
+app.get('/api/notes/:id', (request, response) => {
+    Note.findById(request.params.id).then(note => {
+      response.json(note)
+    })
 })
 
 app.delete('/api/notes/:id', (req, res) => {
@@ -76,22 +71,20 @@ const generateId = () => {
 app.post('/api/notes', (req, res) => {
     
     const body = req.body
-    if (!body.content) {
+    if (body.content === undefined) {
         return res.status(400).json({
             error: 'content missing'
         })
     }
 
-    const note = {
-        id: generateId(),
+    const note = new Note({
         content: body.content,
-        important: body.important || false
-    }
+        important: body.important || false,
+    })
 
-    notes = notes.concat(note)
-
-    console.log(note)
-    res.json(note)
+    note.save().then(savedNote => {
+        res.json(savedNote)
+    })
 })
 
 const unkownEndpoint = (request, response) => {
