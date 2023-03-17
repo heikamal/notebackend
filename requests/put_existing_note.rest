@@ -1,0 +1,8 @@
+PUT http://localhost:3001/api/notes/641309f7166afc677b22cd15
+Content-Type: application/json
+
+{
+  "content": "Postman is good in testing backend",
+  "important": false,
+  "id": "641309f7166afc677b22cd15"
+}
