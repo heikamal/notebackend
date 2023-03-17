@@ -72,7 +72,7 @@ app.delete('/api/notes/:id', (req, res, next) => {
     return maxId + 1
 }*/
 
-app.post('/api/notes', (req, res) => {
+app.post('/api/notes', (req, res, next) => {
     
     const body = req.body
 
